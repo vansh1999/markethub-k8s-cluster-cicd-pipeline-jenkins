@@ -6,9 +6,12 @@ from news.models import NewsArticle
 from django.core.paginator import Paginator
 from django.core.cache import cache
 from bs4 import BeautifulSoup
+import yfinance as yf
+from django.http import JsonResponse
 
 
 
+# clean html @ for removing img tag as seen on moneycontrol
 def clean_html(raw_html):
     
     # Parse the raw HTML with BeautifulSoup
@@ -20,6 +23,40 @@ def clean_html(raw_html):
 
     # Return the cleaned text (without any HTML tags)
     return soup.get_text()
+
+# function @ getting live nifty and sensex prices
+def get_live_prices():
+
+    nifty = yf.Ticker('^NSEI')
+    sensex = yf.Ticker('^BSESN')
+    nifty_bank = yf.Ticker('^NSEBANK')
+    nifty_it = yf.Ticker('^CNXIT')
+    snp500 = yf.Ticker('^GSPC')
+    nasdaq = yf.Ticker('^IXIC')
+    dow30 = yf.Ticker('^DJI')
+
+    nifty_price = nifty.history(period="1d")['Close'].iloc[-1]
+    sensex_price = sensex.history(period="1d")['Close'].iloc[-1]
+    nifty_bank_price = nifty_bank.history(period="1d")['Close'].iloc[-1]
+    nifty_it_price = nifty_it.history(period="1d")['Close'].iloc[-1]
+    snp500_price = snp500.history(period="1d")['Close'].iloc[-1]
+    nasdaq_price = nasdaq.history(period="1d")['Close'].iloc[-1]
+    dow30_price = dow30.history(period="1d")['Close'].iloc[-1]
+
+    return {
+        'nifty_price': nifty_price,
+        'sensex_price': sensex_price,
+        'nifty_bank_price' : nifty_bank_price,
+        'nifty_it_price' : nifty_it_price,
+        'snp500_price' : snp500_price,
+        'nasdaq_price' : nasdaq_price,
+        'dow30_price' : dow30_price
+    }
+
+# function @ refreshing prices every 5 seconds
+def get_prices(request):
+    prices = get_live_prices()
+    return JsonResponse(prices)
 
 
 
@@ -83,10 +120,24 @@ def home(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+
+    # Logic for price 
+    # Get live prices
+    prices = get_live_prices()
+
+
     context = {
         # context for news with pagination
-        'feed': page_obj
+        'feed': page_obj,
         # context for market prices
+        'nifty_price': prices['nifty_price'],
+        'sensex_price': prices['sensex_price'],
+        'nifty_bank_price': prices['nifty_bank_price'],
+        'nifty_it_price' : prices['nifty_it_price'],
+        'snp500_price' : prices['snp500_price'],
+        'nasdaq_price' : prices['nasdaq_price'],
+        'dow30_price' : prices['dow30_price'],
+
 
     }
     

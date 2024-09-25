@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ news.title }}</h5>
-                    <p class="card-text">{{ news.description }}</p>
+                    <p class="card-text">{{ news.description | truncatewords:200}}</p>
                     <a href="{{ news.link }}" target="_blank" type="button" class="btn btn-warning">Read More</a>
                     <p> {{ news.message }} </p>
                 </div>
