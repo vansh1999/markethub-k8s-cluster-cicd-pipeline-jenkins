@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 bg-dark">
+    <h2 class="mb-4">Latest Financial News</h2>
+    <div class="row">
+        {% for news in feed %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ news.title }}</h5>
+                    <p class="card-text">{{ news.description }}</p>
+                    <a href="{{ news.link }}" target="_blank" type="button" class="btn btn-warning">Read More</a>
+                    <p> {{ news.message }} </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>  
+</div>
+
+<div class="row">
+        <ul>
+    {% for entry in feed %}
+        <!-- Display the news items as before -->
+    {% endfor %}
+</ul>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if feed.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ feed.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ feed.number }} of {{ feed.paginator.num_pages }}.
+        </span>
+
+        {% if feed.has_next %}
+            <a href="?page={{ feed.next_page_number }}">next</a>
+            <a href="?page={{ feed.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+
+
+{% endblock %}
