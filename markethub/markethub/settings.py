@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'background_task',
 ]
 
-CRONJOBS = [
-    ('0 */2 * * *', 'news.news_fetcher.fetch_news'),  # Runs every 2 hours
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

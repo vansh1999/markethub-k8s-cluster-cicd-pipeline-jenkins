@@ -1,13 +1,10 @@
+# django imports
+
 from django.shortcuts import render
 import feedparser
-
-# Create your views here.
-
 from news.models import NewsArticle
 from django.core.paginator import Paginator
-
 from django.core.cache import cache
-
 from bs4 import BeautifulSoup
 
 
@@ -24,22 +21,17 @@ def clean_html(raw_html):
     # Return the cleaned text (without any HTML tags)
     return soup.get_text()
 
-# def home(request):
-# 	# make var news_list and get NewsArticle Model and limit number to 50
-# 	news_list = NewsArticle.objects.order_by('-published_at')[:50]
-# 	# render to home page and pass news_list context
-# 	return render(request , 'home.html' , {'news_list' : news_list})
-
-
 
 
 def home(request):
+
+    # rss feeds
     
     rss_urls = [
 
     	# Indian Markets
-    	  'https://economictimes.indiatimes.com/rssfeedsdefault.cms',
-          'https://www.moneycontrol.com/rss/latestnews.xml',
+    	'https://economictimes.indiatimes.com/rssfeedsdefault.cms',
+        'https://www.moneycontrol.com/rss/latestnews.xml',
         'https://www.business-standard.com/rss/home_page_top_stories.rss',
         'https://www.livemint.com/rss/markets',
         'https://www.livemint.com/rss/money',
@@ -58,25 +50,10 @@ def home(request):
         'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
         'https://feeds.finance.yahoo.com/rss/2.0/headline?s=^DJI&region=US&lang=en-US',
 
-     ]  # Your list of RSS feeds
+     ] 
 
 
-    ### working logic for entries with pagination ###
-    # all_entries = []
-    # for rss_url in rss_urls:
-    #     try:
-    #         feed = feedparser.parse(rss_url)
-    #         all_entries.extend(feed.entries)
-    #     except Exception as e:
-    #         print(f"Failed to fetch or parse RSS feed from {rss_url}: {e}")
-    #         continue
-
-    # all_entries.sort(key=lambda entry: entry.published_parsed, reverse=True)
-
-    ######
-
-
-    # news logic
+    # News Logic
     all_entries = []
     seen_titles = set()  # Set to track unique titles or links
 
@@ -101,12 +78,16 @@ def home(request):
     cache.set('rss_news', all_entries, timeout=3600)
 
     # Pagination Logic
-    paginator = Paginator(all_entries, 50)  # Show 50 news items per page
+    # Show 50 news items per page and next in next and prev
+    paginator = Paginator(all_entries, 50)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {
+        # context for news with pagination
         'feed': page_obj
+        # context for market prices
+
     }
     
 
