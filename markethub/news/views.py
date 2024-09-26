@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import yfinance as yf
 from django.http import JsonResponse
 
-
+# Without Model -> NewsArticle
 
 # clean html @ for removing img tag as seen on moneycontrol
 def clean_html(raw_html):
@@ -33,7 +33,7 @@ def get_live_prices():
     nifty_it = yf.Ticker('^CNXIT')
     snp500 = yf.Ticker('^GSPC')
     nasdaq = yf.Ticker('^IXIC')
-    dow30 = yf.Ticker('^DJI')
+    # dow30 = yf.Ticker('^DJI')
 
     nifty_price = nifty.history(period="1d")['Close'].iloc[-1]
     sensex_price = sensex.history(period="1d")['Close'].iloc[-1]
@@ -41,7 +41,7 @@ def get_live_prices():
     nifty_it_price = nifty_it.history(period="1d")['Close'].iloc[-1]
     snp500_price = snp500.history(period="1d")['Close'].iloc[-1]
     nasdaq_price = nasdaq.history(period="1d")['Close'].iloc[-1]
-    dow30_price = dow30.history(period="1d")['Close'].iloc[-1]
+    # dow30_price = dow30.history(period="1d")['Close'].iloc[-1]
 
     return {
         'nifty_price': nifty_price,
@@ -50,10 +50,10 @@ def get_live_prices():
         'nifty_it_price' : nifty_it_price,
         'snp500_price' : snp500_price,
         'nasdaq_price' : nasdaq_price,
-        'dow30_price' : dow30_price
+        # 'dow30_price' : dow30_price
     }
 
-# function @ refreshing prices every 5 seconds
+# function @ refreshing prices every 2 seconds
 def get_prices(request):
     prices = get_live_prices()
     return JsonResponse(prices)
@@ -68,6 +68,8 @@ def home(request):
 
     	# Indian Markets
     	'https://economictimes.indiatimes.com/rssfeedsdefault.cms',
+        'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms',
+        'https://economictimes.indiatimes.com/prime/money-and-markets/rssfeeds/62511286.cms',
         'https://www.moneycontrol.com/rss/latestnews.xml',
         'https://www.business-standard.com/rss/home_page_top_stories.rss',
         'https://www.livemint.com/rss/markets',
@@ -76,6 +78,15 @@ def home(request):
         'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms',
         'https://www.business-standard.com/rss/markets-106.rss',
         'https://feeds.feedburner.com/ndtvprofit-latest',
+        'https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms',
+        'https://www.ndtvprofit.com/stories.rss',
+        'https://www.thehindu.com/business/Economy/feeder/default.rss',
+        'https://www.thehindu.com/business/markets/feeder/default.rss',
+        'https://economictimes.indiatimes.com/wealth/mutual-funds/rssfeeds/49995327.cms',
+        'https://economictimes.indiatimes.com/tech/funding/rssfeeds/78570550.cms',
+        'https://economictimes.indiatimes.com/wealth/personal-finance-news/rssfeeds/49674901.cms',
+        'https://economictimes.indiatimes.com/wealth/rssfeeds/837555174.cms',
+        
 
         # Asian Markets
         'https://www.reuters.com/markets/asia/?format=xml',
@@ -86,6 +97,16 @@ def home(request):
         'https://www.cnbc.com/id/10001147/device/rss/rss.html',
         'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
         'https://feeds.finance.yahoo.com/rss/2.0/headline?s=^DJI&region=US&lang=en-US',
+
+        # not working 
+        'https://www.business-standard.com/rss/markets-106.rss',
+        'https://www.business-standard.com/rss/economy-102.rss',
+        'https://www.business-standard.com/rss/finance-103.rss',
+        'https://www.business-standard.com/rss/finance/personal-finance-10313.rss',
+        'https://www.business-standard.com/rss/finance/investment-10315.rss',
+        'https://www.business-standard.com/rss/markets-106.rss',
+        'https://www.business-standard.com/rss/markets/commodities-10608.rss',
+        'https://www.business-standard.com/rss/markets/stock-market-news-10618.rss',
 
      ] 
 
@@ -136,7 +157,7 @@ def home(request):
         'nifty_it_price' : prices['nifty_it_price'],
         'snp500_price' : prices['snp500_price'],
         'nasdaq_price' : prices['nasdaq_price'],
-        'dow30_price' : prices['dow30_price'],
+        # 'dow30_price' : prices['dow30_price'],
 
 
     }

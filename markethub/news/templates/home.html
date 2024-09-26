@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<!-- News container starts -->
 <div class="container mt-5 bg-light">
     <h2 class="mb-4">Latest Financial News</h2>
     <div class="row">
@@ -18,14 +20,15 @@
         {% endfor %}
     </div>  
 </div>
+<!-- News container ends -->
 
+<!-- Pagination template start -->
 <div class="row">
         <ul>
     {% for entry in feed %}
         <!-- Display the news items as before -->
     {% endfor %}
 </ul>
-
 <div class="pagination">
     <span class="step-links">
         {% if feed.has_previous %}
@@ -44,6 +47,17 @@
     </span>
 </div>
 </div>
+<!-- Pagination template end -->
+
+
+<div class="row-fluid">
+    <div class="span12 text-center">
+        <a href="https://twitter.com/heyyvanshh" target="_blank" style="text-decoration: none"> Created by Vansh Bhardwaj | </a>
+        <a href="https://github.com/vansh1999" target="_blank" style="text-decoration: none"> Source code @GitHub </a>
+        
+    </div>
+</div>
+
 
 
 

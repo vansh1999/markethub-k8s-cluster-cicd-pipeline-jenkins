@@ -13,6 +13,7 @@ from django.db import models
 
 
 class NewsArticle(models.Model):
+	
 	title = models.CharField(max_length=255)
 	description = models.TextField()
 	source = models.CharField(max_length=400)
@@ -23,5 +24,4 @@ class NewsArticle(models.Model):
 	def __str__(self):
 		return self.title
 
-
-
+ 
