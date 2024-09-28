@@ -27,41 +27,48 @@ To get a copy of the project up and running on your local machine, follow these 
 ### Prerequisites
 
 Python 3.x
+
 Django 4.x
+
 pip (Python package installer)
 
 ### Steps to Install
 
-Clone the Repository
+1. Clone the Repository
 
 ``` $ git clone https://github.com/vansh1999/markethub.git ```
 
-Navigate to the Project Directory:
+2. Navigate to the Project Directory:
 
 ``` $ cd markethub ```
 
-Create a Virtual Environment
+3. Create a Virtual Environment
 
 ``` $ python3 -m venv env ```
 
-Activate the Virtual Environment
+4. Activate the Virtual Environment
 
 ``` $ source env/bin/activate  # For Linux/MacOS ```
+
 ``` $ env\Scripts\activate      # For Windows ```
 
-Run Migrations
+5. Install Dependencies
+
+This command will install all the packages listed in the requirements.txt file, ensuring that the correct versions of each package are used.
+
+``` $ pip install -r requirements.txt ``` 
+
+6. Run Migrations
 
 ``` $ python manage.py migrate ```
 
-Run the Development Server
+7. Run the Development Server
 
 ``` $ python manage.py runserver ```
 
-Note -> If Server does not work, might be possibly due to some dependencies, please install Dependencies meanwhile I upload requirements.txt file.
-
 When running - Access the App
 
-Open a web browser and go to: http://127.0.0.1:8000
+8. Open a web browser and go to: http://127.0.0.1:8000
 
 ### Project Structure
 
@@ -80,6 +87,7 @@ markethub/
 │   └── urls.py/
     └── settings.py/
 ├── manage.py              # Django management script
+|─── requirements.txt      # List of dependencies
 |─── README.md             # Project README file
 ```
 
