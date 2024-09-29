@@ -19,7 +19,8 @@ RSS Feeds: To pull in real-time financial news
 JSON: To serve real-time stock data via APIs
 
 ## Screenshots
-![Screenshot 2024-09-26 at 9 50 04 PM](https://github.com/user-attachments/assets/98f07027-c6b7-4d58-bc8d-bd53b8fa8469)
+
+![Screenshot 2024-09-29 at 9 01 15 AM](https://github.com/user-attachments/assets/5bab1844-e594-4216-8fc0-2d71f630d4aa)
 
 ## Installation and Setup
 To get a copy of the project up and running on your local machine, follow these steps.
