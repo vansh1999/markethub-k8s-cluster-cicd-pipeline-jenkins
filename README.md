@@ -149,7 +149,9 @@ If you want to skip building the Docker image yourself, you can pull the prebuil
 
     ``` $ docker pull vansh1999/markethub ```
 
-3.  Run the image and start container on port 8000
+   Docker Hub -> https://hub.docker.com/repository/docker/vansh1999/markethub/general
+
+4.  Run the image and start container on port 8000
 
     ``` $ docker run -d -p 8000:8000 vansh1999/markethub ```
 
