@@ -11,11 +11,17 @@ AJAX-based Auto-refresh: Real-time updates without refreshing the entire page.
 Responsive Design: Built with Bootstrap for responsive and mobile-friendly UI.
 
 ## Technologies Used
+
 Python: Backend logic
+
 Django: Web framework
+
 JavaScript (AJAX/jQuery): For dynamic and real-time content updates
+
 Bootstrap: Frontend for responsive design
+
 RSS Feeds: To pull in real-time financial news
+
 JSON: To serve real-time stock data via APIs
 
 ## Screenshots
