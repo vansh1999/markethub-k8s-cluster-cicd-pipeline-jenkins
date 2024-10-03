@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  markethub:
+    container_name: "markethub"
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - markethub_volume:/app
+volumes:
+  markethub_volume:
