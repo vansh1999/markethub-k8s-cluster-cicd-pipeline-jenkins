@@ -28,7 +28,10 @@ JSON: To serve real-time stock data via APIs
 
 ![Screenshot 2024-09-29 at 9 01 15 AM](https://github.com/user-attachments/assets/5bab1844-e594-4216-8fc0-2d71f630d4aa)
 
-## Installation and Setup
+# Installation and Setup
+
+## Option 1: Default Installation
+
 To get a copy of the project up and running on your local machine, follow these steps.
 
 ### Prerequisites
@@ -43,41 +46,120 @@ pip (Python package installer)
 
 1. Clone the Repository
 
-``` $ git clone https://github.com/vansh1999/markethub.git ```
+    ``` $ git clone https://github.com/vansh1999/markethub.git ```
 
 2. Navigate to the Project Directory:
 
-``` $ cd markethub ```
+    ``` $ cd markethub ```
 
 3. Create a Virtual Environment
 
-``` $ python3 -m venv env ```
+    ``` $ python3 -m venv env ```
 
 4. Activate the Virtual Environment
 
-``` $ source env/bin/activate  # For Linux/MacOS ```
+    ``` $ source env/bin/activate  # For Linux/MacOS ```
 
-``` $ env\Scripts\activate      # For Windows ```
+    ``` $ env\Scripts\activate      # For Windows ```
 
-5. Install Dependencies
+5. Install Dependencies : This command will install all the packages listed in the requirements.txt file, ensuring that the correct versions of each package are used.
 
-This command will install all the packages listed in the requirements.txt file, ensuring that the correct versions of each package are used.
+    ``` $ pip install -r requirements.txt ```
+    
+7. Run Migrations
 
-``` $ pip install -r requirements.txt ``` 
+    ``` $ python manage.py migrate ```     
 
-6. Run Migrations
+8. Run the Development Server
 
-``` $ python manage.py migrate ```
-
-7. Run the Development Server
-
-``` $ python manage.py runserver ```
+    ``` $ python manage.py runserver ```
 
 When running - Access the App
 
 8. Open a web browser and go to: http://127.0.0.1:8000
 
-### Project Structure
+
+## Option 2: Installation Using Docker
+
+### Prerequisites
+
+Docker installed on your machine
+
+### Steps to install Docker
+
+1. Get docker engine using docker.io
+
+    ``` $ sudo apt install docker.io ```
+
+2. Add a group docker and add current user ubuntu
+
+    ``` $ sudo usermod -a -G docker $USER ```
+
+3. Reboot
+
+   ``` $ sudo reboot  ```
+
+### Run Docker
+
+1. Clone the repository and cd
+
+    ``` $ git clone https://github.com/vansh1999/markethub.git ```
+   
+    ``` $ cd markethub ```
+
+2. Build Dockerfile
+
+   We already have a Dockerfile in our repo, you just need to build and run it
+
+    ``` $ docker build . -t markethub:latest ```
+
+4. Run the container
+
+    ``` $ docker run -d -p 8000:8000 markethub:latest ```
+
+
+Access the app: Open your browser at http://localhost:8000
+
+Or if using AWS ec2 instance goto <public_ip>:8000
+
+Note -> Add port 8000 at the inbound security group
+
+
+## Option 3: Installation Using Docker Compose
+
+Installation steps to get docker will be same as above in option 2
+
+1. Install docker compose
+   
+    ``` $ sudo apt install docker-compose ```
+   
+We already have a docker-compose.yaml file in our repo, just need run docker compose
+
+3. Run docker compose
+
+    ``` $ docker-compose up -d ```
+
+## Option 4: Pull Prebuilt Docker Image from Docker Hub
+
+If you want to skip building the Docker image yourself, you can pull the prebuilt image directly from Docker Hub, which I had pushed to Docker Hub.
+
+1. Install Docker as mentioned in option 2
+
+2. pull image from docker hub
+
+    ``` $ docker pull vansh1999/markethub ```
+
+3.  Run the image and start container on port 8000
+
+    ``` $ docker run -d -p 8000:8000 vansh1999/markethub ```
+
+
+Access the app: Open your browser at http://localhost:8000
+
+Or if using AWS ec2 instance goto <public_ip>:8000
+
+
+## Project Structure
 
 ```
 markethub/
@@ -96,6 +178,10 @@ markethub/
 ├── manage.py              # Django management script
 |─── requirements.txt      # List of dependencies
 |─── README.md             # Project README file
+|─── Dockerfile            # Dockerfile to build image
+|─── docker-compose.yaml   # YAML file to run with docker-compose
+|─── volume                # Volume for our app, Persistent data storage
+
 ```
 
 ### RSS Feeds Used
