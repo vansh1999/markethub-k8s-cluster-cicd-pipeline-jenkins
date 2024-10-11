@@ -28,7 +28,7 @@ pipeline {
         
         stage("Deploy"){
             steps{
-                sh """
+                sh '''
 
       			CONTAINER_ID=$(docker ps -q --filter publish=8000)
 
@@ -43,7 +43,7 @@ pipeline {
 		    	docker run -d -p 8000:8000 markethub:latest
 
 
-		"""
+		        '''
 		    
             }
         }
