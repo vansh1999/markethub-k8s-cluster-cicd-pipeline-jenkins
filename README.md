@@ -253,5 +253,5 @@ Twitter: [@heyyvanshh] (https://x.com/heyyvanshh)
 
 
 ### Jenkins CICD Pipeline
--> 
+-> Distributed build jenkins
 
