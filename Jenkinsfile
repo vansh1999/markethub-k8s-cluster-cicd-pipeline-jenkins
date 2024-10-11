@@ -28,7 +28,23 @@ pipeline {
         
         stage("Deploy"){
             steps{
-                sh 'docker run -d -p 8000:8000 markethub:latest'
+                sh """
+
+      			CONTAINER_ID=$(docker ps -q --filter publish=8000)
+
+			if [ -n "$CONTAINER_ID" ]; then
+  				docker stop $CONTAINER_ID
+			else
+  				echo "No container is using port 8000"
+			fi
+
+		    
+		    
+		    	docker run -d -p 8000:8000 markethub:latest
+
+
+		"""
+		    
             }
         }
         
