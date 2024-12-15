@@ -71,6 +71,9 @@ Deploy to Kubernetes: Deploys the app using Kubernetes manifest files (deploymen
 
 https://medium.com/@vansh.bhardwaj1999/django-application-markethub-ci-cd-pipeline-to-deploy-on-kubernetes-cluster-using-jenkins-f17396d9182f
 
+https://vanshbhardwaj.hashnode.dev/step-by-step-guide-deploying-django-on-kubernetes-with-jenkins-cicd
+
+
 ## Author
 
 Vansh Bhardwaj
